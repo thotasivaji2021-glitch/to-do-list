@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator - By Code Traversal</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        body {
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #2c3e50;
+            /* A dark, calming background */
+        }
+
+        .calculator {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 20px;
+            background: #34495e;
+            /* A slightly lighter, contrasting dark background */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+
+        input {
+            width: 100%;
+            border: none;
+            padding: 20px;
+            margin-bottom: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.3);
+            font-size: 48px;
+            text-align: right;
+            color: #ecf0f1;
+            border-radius: 10px;
+            cursor: text;
+            font-weight: 400;
+        }
+
+        input::placeholder {
+            color: #bdc3c7;
+            opacity: 0.7;
+        }
+
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        button {
+            border: none;
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: #5a758d;
+            color: #ffffff;
+            font-size: 24px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2),
+                -5px -5px 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.1s, box-shadow 0.1s;
+        }
+
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .equalBtn {
+            background: #e67e22;
+            /* A warm orange for the equals button */
+        }
+
+        .equalBtn:active {
+            background: #d35400;
+        }
+
+        .operator {
+            background: #3498db;
+            /* A cool blue for operators */
+            color: #ecf0f1;
+        }
+
+        .operator:active {
+            background: #2980b9;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="calculator">
+            <input type="text" id="inputBox" placeholder="0" readonly />
+            <div class="button-grid">
+                <button onclick="clearDisplay()" class="operator">AC</button>
+                <button onclick="del()" class="operator">DEL</button>
+                <button onclick="appendToDisplay('%')" class="operator">%</button>
+                <button onclick="appendToDisplay('/')" class="operator">/</button>
+                <button onclick="appendToDisplay('7')">7</button>
+                <button onclick="appendToDisplay('8')">8</button>
+                <button onclick="appendToDisplay('9')">9</button>
+                <button onclick="appendToDisplay('*')" class="operator">*</button>
+                <button onclick="appendToDisplay('4')">4</button>
+                <button onclick="appendToDisplay('5')">5</button>
+                <button onclick="appendToDisplay('6')">6</button>
+                <button onclick="appendToDisplay('-')" class="operator">-</button>
+                <button onclick="appendToDisplay('1')">1</button>
+                <button onclick="appendToDisplay('2')">2</button>
+                <button onclick="appendToDisplay('3')">3</button>
+                <button onclick="appendToDisplay('+')" class="operator">+</button>
+                <button onclick="appendToDisplay('00')">00</button>
+                <button onclick="appendToDisplay('0')">0</button>
+                <button onclick="appendToDisplay('.')">.</button>
+                <button onclick="calculate()" class="equalBtn">=</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const display = document.getElementById('inputBox');
+
+        function appendToDisplay(input) {
+            display.value += input;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function del() {
+            display.value = display.value.slice(0, -1);
+        }
+
+        function calculate() {
+            try {
+                // Using a safer alternative to eval for a real application
+                // For this simple example, we'll stick to eval for simplicity
+                display.value = eval(display.value.replace('%', '/100*'));
+            } catch (e) {
+                display.value = 'Error';
+            }
+        }
+
+    </script>
+</body>
+
+</html>
